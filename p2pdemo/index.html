@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>P2P Demo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://unpkg.com/jquery@1.12.4/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type='text/javascript' src="https://cdn.jsdelivr.net/gh/augok/p2phls@latest/js/p2pl.js"></script>
+        <script type='text/javascript' src="https://cdn.jsdelivr.net/gh/augok/p2phls@latest/js/p2ph.js"></script>
+        <script type='text/javascript' src="https://cdn.jsdelivr.net/gh/augok/p2phls@latest/js/p2phls.js"></script>
+        <script src="https://unpkg.com/hls.min@0.0.2/index.js" type="text/javascript" charset="utf-8"></script>
+        <script src="https://unpkg.com/dplayer@1.27.0/dist/DPlayer.min.js" type="text/javascript" charset="utf-8"></script>
+        <link type="text/css" rel="stylesheet" href="./css/index.css?2" />
+    </head>
+    <body>
+        <div class="wrap">
+            <h1>P2P Demo</h1>
+            <div>
+                git: <a href="https://github.com/augok/p2phls">https://github.com/augok/p2phls</a>
+            </div>
+            <hr />
+            <div class="laybox">
+                <div id="video" class="video"></div>
+            </div>
+            <div class="player-statistics">
+                <div class="statis-item">
+                    <span class="item-label">
+                    <span class="item-label-data peers">0</span><br />
+                    <span class="item-name peers">连接节点</span></span
+                    >
+                </div>
+                <div class="statis-item">
+                    <span class="item-label">
+                    <span class="item-label-data httpmb">0</span> MB<br />
+                    <span class="item-name upload">下载流量</span></span
+                    >
+                </div>
+                <div class="statis-item">
+                    <span class="item-label"
+                    ><span class="item-label-data p2pmb">0</span> MB<br />
+                    <span class="item-name offload">节省流量</span></span
+                    >
+                </div>
+                <div class="statis-item">
+                    <span class="item-label"
+                    ><span class="item-label-data p2pr">0</span> %<br />
+                    <span class="item-name ratio">P2P占比</span></span
+                    >
+                </div>
+            </div>
+            <div class="action-button">创建新连接</div>
+        </div>
+        <script>
+            $(".action-button").on('click',function(){
+                window.open(document.location.href, '_blank');
+            });
+            var params = new URLSearchParams(document.location.search);
+            var urls = params.get("url");
+            if(!urls){
+                alert("请在链接中添加url参数以及相应的m3u8播放地址");
+            }else{
+                var p2phls = new P2Phls(urls);
+                if(!p2phls.isP2P()){
+                    alert("此浏览器不支持p2p加速，建议使用chrome浏览器");
+                }
+                if (p2phls.isHls()) {
+                    var player = new DPlayer({
+                        container: document.getElementById('video'),
+                        volume: 1,
+                        autoplay: true,
+                        preload: 'auto',
+                        video: {
+                            url: urls,
+                            type: 'customHls',
+                            customType: {
+                                'customHls': function(video, player) {
+                                    if(p2phls.isP2P()){
+                                        var hls = new Hls({
+                                            liveSyncDurationCount: 7,
+                                            loader: p2phls.getLoader()
+                                        });
+                                        p2phls.initHlsPlayer(hls);
+                                    }else{
+                                        var hls = new Hls();
+                                    }
+                                    hls.loadSource(video.src);
+                                    hls.attachMedia(video);
+                                }
+                            }
+                        }
+                    });
+                    player.on('loadstart', function() {
+                        $('#video').find('.dplayer-menu .dplayer-menu-item').not(":eq(0)").remove();
+                    });
+                    if (p2phls.isP2P()) {
+                        p2phls.on('bytechange', function(data){
+                            var httpMb = data.http / 1048576;
+                            var p2pMb = data.p2p / 1048576;
+                            var totalMb = httpMb + p2pMb;
+                            var p2pr = p2pMb / totalMb;
+                            $('.httpmb').text(httpMb.toFixed(1));
+                            if(p2pMb) {
+                                $('.p2pmb').text(p2pMb.toFixed(1));
+                                $('.p2pr').text(p2pr.toFixed(1));
+                            } else {
+                                $('.p2pmb').text('0');
+                                $('.p2pr').text('0');
+                            } 
+                        });
+                        p2phls.on('peers', function(num,peer){
+                            num > 0 ? $('.peers').text(num):$('.peers').text('0');
+                        });
+                    }
+                }else{
+                    alert("此浏览器不支持播放器解码，建议使用chrome浏览器");
+                }
+            }
+        </script>
+    </body>
+</html>

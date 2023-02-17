@@ -1,0 +1,87 @@
+.wrap {
+    margin: 10px auto;
+    max-width: 800px;
+    text-align: center;
+    font-size: 14px
+}
+
+.laybox {
+    position: relative;
+    background-color: #000
+}
+
+.laybox:before {
+    display: block;
+    padding-top: 56.25%;
+    width: 100%;
+    content: ""
+}
+
+.video {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%
+}
+
+.player-statistics {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    width: 100%;
+    height: auto
+}
+
+.player-statistics,
+.statis-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start
+}
+
+.statis-item {
+    position: relative;
+    width: 9.8rem;
+    height: 8rem
+}
+
+.item-label {
+    position: absolute;
+    top: 35%;
+    right: .1rem;
+    left: .1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 30px
+}
+
+.item-label-data {
+    color: #444;
+    font-weight: 600;
+    font-size: 2.7rem
+}
+
+.item-name {
+    padding: 2px 5px;
+    border-radius: 5px;
+    color: #444;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+    line-height: 24px
+}
+.action-button {
+    margin-top: 20px;
+    display: inline-block;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #1e90ff;
+    padding: 0.8rem 1.6rem;
+    border-radius: 4px;
+    transition: background-color .1s ease;
+    box-sizing: border-box;
+}
+.action-button:hover {
+    cursor: pointer;
+    background-color: #4ba6ff
+}
