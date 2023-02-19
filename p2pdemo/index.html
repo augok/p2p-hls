@@ -97,7 +97,7 @@
                             var httpMb = data.http / 1048576;
                             var p2pMb = data.p2p / 1048576;
                             var totalMb = httpMb + p2pMb;
-                            var p2pr = p2pMb / totalMb;
+                            var p2pr = p2pMb / totalMb * 100;
                             $('.httpmb').text(httpMb.toFixed(1));
                             if(p2pMb) {
                                 $('.p2pmb').text(p2pMb.toFixed(1));
