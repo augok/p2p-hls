@@ -49,7 +49,7 @@ Then there's a free, CDN hosted version of hls.js that anyone can use. Add these
 ```
 
 ```js
-// url is m3u8 link address. example: https://m3u8.link.address/video.m3u8
+// url is link address.
 var p2phls = new P2Phls(url);
 
 var player = new DPlayer({
