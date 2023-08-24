@@ -78,7 +78,7 @@
                 video.id = "videohls";
                 video.volume = 0;
                 video.setAttribute("playsinline", "");
-                video.setAttribute("muted", "");
+                // video.setAttribute("muted", "");
                 video.setAttribute("autoplay", "");
                 video.setAttribute("controls", "");
                 videoContainer.appendChild(video);
@@ -115,7 +115,8 @@
                     });
                 }
             }else{
-                alert("此浏览器不支持播放器解码，建议使用chrome浏览器");
+                alert("此浏览器不支持加速器解码，将使用普通模式播放");
+                $('#video').html('<video autoplay x5-playsinline="" playsinline="" webkit-playsinline="" x-webkit-airplay="allow" preload="true" controls src="' + urls + '" style="width:100%;height:100%;"></video>');
             }
         }
     </script>
