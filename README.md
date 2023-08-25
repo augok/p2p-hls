@@ -21,14 +21,14 @@ https://webp2p.augok.com/p2pdemo/?url=https://m3u8.link.address/video.m3u8
 
 ## Quick Start
 
-Download the latest release and load the JavaScript library.
+Load the latest CDN hosted version of JavaScript library.
 
 Add these tags to your document's `<head>`:
 
 ```html
-<script src="your filepath/../p2pl.js"></script>
-<script src="your filepath/../p2ph.js"></script>
-<script src="your filepath/../p2phls.js"></script>
+<script src="https://unpkg.com/webp2p-hls@latest/p2pl.js"></script>
+<script src="https://unpkg.com/webp2p-hls@latest/p2ph.js"></script>
+<script src="https://unpkg.com/webp2p-hls@latest/p2phls.js"></script>
 ```
 
 Then there's a free, CDN hosted version of hls.js that anyone can use. Add these tags to your document's `<head>`:
@@ -40,9 +40,9 @@ Then there's a free, CDN hosted version of hls.js that anyone can use. Add these
 ## Example by DPlayer
 
 ```html
-<script src="your filepath/../p2pl.js"></script>
-<script src="your filepath/../p2ph.js"></script>
-<script src="your filepath/../p2phls.js"></script>
+<script src="https://unpkg.com/webp2p-hls@latest/p2pl.js"></script>
+<script src="https://unpkg.com/webp2p-hls@latest/p2ph.js"></script>
+<script src="https://unpkg.com/webp2p-hls@latest/p2phls.js"></script>
 <script src="https://unpkg.com/hls.min@0.0.2/index.js"></script>
 <!-- unpkg : use the latest version of DPlayer.js -->
 <script src="https://unpkg.com/dplayer/dist/DPlayer.min.js"></script>
