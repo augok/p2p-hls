@@ -14,6 +14,16 @@ It significantly reduces traditional CDN traffic and cost while delivering video
 
 - [Demo](https://webp2p.augok.com/p2pdemo/)
 
+**Homepage**
+
+https://webp2p.augok.com
+
+**Free!! Use directly!**
+
+Problems caused by CDN have been fixed!!!
+
+https://webp2p.augok.com/player/?url=
+
 **Example**
 
 https://webp2p.augok.com/p2pdemo/?url=https://m3u8.link.address/video.m3u8
@@ -123,7 +133,7 @@ p2phls.on('peers', function(num,peer){
 });
 ```
 
-**See p2pdemo for more...**
+**[See p2pdemo for more...](https://webp2p.augok.com)**
 
 ## Contact Us
 
